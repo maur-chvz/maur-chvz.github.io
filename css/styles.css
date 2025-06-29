@@ -1,0 +1,139 @@
+:root {
+  --main-bg: #000000;         /* Main content background */
+  --sidebar-bg: #1a170f;      /* Sidebar background */
+  --title-color: #29ccc4;     /* Highlighted links & headings */
+  --text-color: #ffffff;      /* Main text */
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: code, Monaco, Consolas, ubuntu mono, monospace;
+}
+
+body {
+  display: flex;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: var(--main-bg);
+  color: var(--text-color);
+  min-height: 100vh;
+}
+
+/* Sidebar */
+header {
+  width: 220px;
+  background-color: var(--sidebar-bg);
+  color: #ffffff;
+  padding: 30px 20px;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  box-shadow: 3px 0 10px #0b5c58;
+  border-right: 1px solid #1a1919;
+}
+
+header h1 {
+  color: var(--title-color);
+  font-size: 1.5rem;
+  margin-bottom: 40px;
+}
+
+nav {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+nav a {
+  color: var(--text-color);
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.2s;
+}
+
+nav a:hover {
+  color: #1da7a1;
+}
+
+/* Main content area */
+main {
+  margin-left: 220px; /* Match sidebar width */
+  padding: 40px;
+  flex: 1;
+}
+
+.hero {
+  margin-bottom: 40px;
+}
+
+.hero h2 {
+  color: var(--title-color);
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+}
+
+.blog-posts .post {
+  background-color: #111;
+  padding: 20px;
+  margin-bottom: 30px;
+  border-left: 5px solid var(--title-color);
+  border-radius: 4px;
+  box-shadow: 0 0 10px rgba(41, 204, 196, 0.1);
+}
+
+.post h3 {
+  margin-top: 0;
+  color: var(--title-color);
+}
+
+.post .date {
+  font-size: 0.9em;
+  color: #aaa;
+}
+
+.post a {
+  color: var(--title-color);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+footer {
+  margin-top: 60px;
+  text-align: center;
+  color: #666;
+  font-size: 0.9em;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.post-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+}
+
+.post-list li {
+  margin-bottom: 15px;
+  font-size: 1rem;
+}
+
+.post-list .date {
+  color: #aaa;
+  font-weight: bold;
+}
+
+.post-list a {
+  color: var(--title-color);
+  text-decoration: none;
+}
+
+.post-list a:hover {
+  text-decoration: underline;
+}
+
+
