@@ -1,28 +1,28 @@
-/* Color Palette */
 :root {
-  --bg-color: rgb(240, 244, 245);
-  --font-color: rgb(57, 0, 7);
-  --accent-color: rgb(200, 50, 70); /* Optional for links/buttons */
+  --main-bg: #000000;         /* Black background */
+  --title-color: #29ccc4;     /* Cyan/aqua for titles & links */
+  --text-color: #ffffff;      /* White for body text */
 }
 
 body {
   margin: 0;
   padding: 0;
+  background-color: var(--main-bg);
+  color: var(--text-color);
   font-family: 'Segoe UI', sans-serif;
-  background-color: var(--bg-color);
-  color: var(--font-color);
 }
 
+/* Header styling */
 header {
-  background-color: rgb(225, 230, 231);
   padding: 20px;
   text-align: center;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid #333;
 }
 
 header h1 {
   margin: 0;
   font-size: 2rem;
+  color: var(--title-color);
 }
 
 nav {
@@ -32,7 +32,7 @@ nav {
 nav a {
   margin: 0 15px;
   text-decoration: none;
-  color: var(--font-color);
+  color: var(--title-color);
   font-weight: bold;
 }
 
@@ -42,6 +42,7 @@ main {
   padding: 0 20px;
 }
 
+/* Hero section */
 .hero {
   text-align: center;
   margin-bottom: 40px;
@@ -49,37 +50,44 @@ main {
 
 .hero h2 {
   font-size: 1.5rem;
-  margin-bottom: 10px;
+  color: var(--title-color);
 }
 
+.hero p {
+  color: var(--text-color);
+}
+
+/* Blog posts section */
 .blog-posts .post {
-  background: white;
+  background-color: #111;
   padding: 20px;
   margin-bottom: 30px;
-  border-left: 5px solid var(--font-color);
-  box-shadow: 0 0 8px rgba(0,0,0,0.05);
+  border-left: 5px solid var(--title-color);
   border-radius: 4px;
+  box-shadow: 0 0 10px rgba(41, 204, 196, 0.1);
 }
 
 .post h3 {
   margin-top: 0;
+  color: var(--title-color);
 }
 
 .post .date {
   font-size: 0.9em;
-  color: #666;
+  color: #aaa;
 }
 
 .post a {
-  color: var(--accent-color);
+  color: var(--title-color);
   text-decoration: none;
   font-weight: bold;
 }
 
+/* Footer */
 footer {
   text-align: center;
   padding: 20px;
-  background-color: rgb(225, 230, 231);
-  color: #333;
+  color: #777;
   font-size: 0.9em;
+  border-top: 1px solid #333;
 }
