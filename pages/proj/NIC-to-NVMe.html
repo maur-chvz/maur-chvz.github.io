@@ -13,6 +13,110 @@
       <br>
       <p>Started the NIC-to-NVMe Data Service project (see under projects).</p>
       <br>
+      <br>
+      <h3>Discovered hardware requirements:</h3>
+      <table class="book-table">
+        <thead>
+            <tr>
+                <th>Component</th>
+                <th>Purpose</th>
+                <th>Recommended Spec</th>
+                <th>Why It's Needed</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>CPU with VT-d (IOMMU)</td>
+                <td>Enables DPDK/SPDK to access hardware directly in user-space</td>
+                <td>Intel i5/i7 (8th gen or newer) or AMD Ryzen with IOMMU</td>
+                <td>Required for <strong>PCIe passthrough</strong>, <strong>hugepage memory</strong>, and <strong>user-space I/O</strong></td>
+            </tr>
+            <tr>
+                <td>16+ GB RAM</td>
+                <td>Memory for application + pinned hugepages</td>
+                <td>16 GB or more</td>
+                <td>DPDK/SPDK reserve memory in <strong>hugepages</strong>, which must be pinned (locked in RAM) for zero-copy</td>
+            </tr>
+            <tr>
+                <td>Intel Server NIC (e.g., i350-T2)</td>
+                <td>Direct NIC access via DPDK; bypass kernel</td>
+                <td>Intel i350, X520, or Mellanox ConnectX-3 or newer</td>
+                <td>Most <strong>consumer NICs</strong> (e.g., i219-LM) aren't supported; DPDK needs a <strong>Poll Mode Driver (PMD)</strong> compatible NIC</td>
+            </tr>
+            <tr>
+                <td>NVMe SSD</td>
+                <td>Persistent storage backend for key-value service</td>
+                <td>Any PCIe NVMe SSD (Samsung 970 EVO, WD SN770, etc.)</td>
+                <td>SPDK bypasses the kernel storage stack; requires <strong>NVMe block device</strong></td>
+            </tr>
+            <tr>
+                <td>PCIe Slot(s)</td>
+                <td>Expansion for NIC and/or NVMe SSD if needed</td>
+                <td>At least 1x PCIe x4/x8 slot</td>
+                <td>Needed to install a server NIC or a PCIe NVMe SSD adapter card</td>
+            </tr>
+            <tr>
+                <td>Power Supply (for full NICs)</td>
+                <td>Stable power for dual/quad-port NICs</td>
+                <td>250W+ (included in most desktops)</td>
+                <td>High-performance NICs may require more stable power than laptops provide</td>
+            </tr>
+            <tr>
+                <td>BIOS with VT-d and SR-IOV</td>
+                <td>Enables IOMMU and device passthrough</td>
+                <td>Must support enabling IOMMU/VT-d in BIOS</td>
+                <td>Required to bind devices for DPDK/SPDK use</td>
+            </tr>
+            <tr>
+                <td>Cooling and Form Factor</td>
+                <td>Sustained performance</td>
+                <td>Mid-tower desktop (e.g., OptiPlex 5060)</td>
+                <td>Small laptops thermal throttle; desktops allow you to run full workloads</td>
+            </tr>
+        </tbody>
+      </table>
+      <br>
+      <br>
+      <h3>Use cases in project pipeline:</h3>
+      <table class="book-table">
+        <thead>
+            <tr>
+                <th>Stage</th>
+                <th>Hardware Involved</th>
+                <th>Role</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Networking</td>
+                <td>Intel i350 NIC + DPDK</td>
+                <td>Receive UDP packets using zero-copy PMD driver</td>
+            </tr>
+            <tr>
+                <td>Packet Parsing</td>
+                <td>CPU + RAM</td>
+                <td>Deserialize custom protocol, enqueue for disk write</td>
+            </tr>
+            <tr>
+                <td>Storage</td>
+                <td>NVMe SSD + SPDK</td>
+                <td>Write value data with zero-copy NVMe commands</td>
+            </tr>
+            <tr>
+                <td>Zero-Copy Path</td>
+                <td>RAM + DPDK/SPDK drivers + CPU</td>
+                <td>Memory mapping avoids data copies between NIC → CPU → NVMe</td>
+            </tr>
+            <tr>
+                <td>Performance Testing</td>
+                <td>Full system</td>
+                <td>Measure latency, throughput, and zero-copy effectiveness</td>
+            </tr>
+        </tbody>
+      </table>
+      <br>
+      <p> This project is going to stay on hold for a bit...</p>
+      <br>
       <a href="/pages/projects.html">← Back</a>
     </main>
   </div>
